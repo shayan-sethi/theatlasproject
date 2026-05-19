@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Globe (CSV mapping)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap');
+
+  :root {
+    --bg-1: #030507;
+    --bg-2: #0a1118;
+    --text-main: #d7dee8;
+    --text-muted: #8a97a8;
+    --panel: rgba(10, 16, 24, 0.62);
+    --panel-border: rgba(145, 160, 180, 0.2);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Segoe UI", "Inter", sans-serif;
+    color: var(--text-main);
+    background:
+      radial-gradient(1000px 600px at 20% -10%, #152332 0%, transparent 60%),
+      radial-gradient(900px 500px at 85% 120%, #111a24 0%, transparent 65%),
+      linear-gradient(140deg, var(--bg-1), var(--bg-2));
+  }
+
+  .landing {
+    position: relative;
+    height: 100vh;
+    padding: 0;
+  }
+
+  .top-row,
+  .bottom-row {
+    position: absolute;
+    left: 24px;
+    right: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .top-row { top: 20px; }
+  .bottom-row { bottom: 20px; }
+
+  .hero {
+    position: relative;
+    height: 100vh;
+  }
+
+  .hero-copy {
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(880px, 92vw);
+    text-align: center;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .hero-copy h1 {
+    margin: 0;
+    font-size: clamp(24px, 3.6vw, 50px);
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  }
+
+  .globe-shell {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(78vh, 88vw, 860px);
+    aspect-ratio: 1 / 1;
+    border-radius: 999px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel);
+    box-shadow:
+      inset 0 0 70px rgba(30, 44, 59, 0.25),
+      0 25px 80px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    z-index: 2;
+  }
+
+  #globeViz {
+    width: 100%;
+    height: 100%;
+  }
+
+  .hint {
+    position: absolute;
+    bottom: 6.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    pointer-events: none;
+    z-index: 3;
+    text-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 700px) {
+    .landing { padding: 0; }
+    .hero-copy { top: 3%; }
+    .hint { bottom: 5%; }
+  }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
+</head>
+<body>
+
+<main class="landing">
+  <div class="top-row">
+    <span>Atlas</span>
+    <span>Global Intelligence</span>
+  </div>
+
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>The Atlas Project</h1>
+    </div>
+
+    <div class="globe-shell">
+      <div id="globeViz"></div>
+    </div>
+
+    <div class="hint">Interactive Globe • Continent-Level Focus</div>
+  </section>
+
+  <div class="bottom-row">
+    <span>Serious by Design</span>
+    <span>Data-driven Mapping</span>
+  </div>
+</main>
+
+<script>
+const world = new Globe(document.getElementById('globeViz'))
+  .globeImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-blue-marble.jpg')
+  .bumpImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/earth-topology.png')
+  .backgroundImageUrl('//cdn.jsdelivr.net/npm/three-globe/example/img/night-sky.png');
+
+world.controls().autoRotate = false;
+world.controls().autoRotateSpeed = 0.6;
+world.controls().enableZoom = false;
+world.controls().enablePan = false;
+
+function resizeGlobe() {
+  const el = document.getElementById('globeViz');
+  const rect = el.getBoundingClientRect();
+  world.width(rect.width);
+  world.height(rect.height);
+}
+
+resizeGlobe();
+window.addEventListener('resize', resizeGlobe);
+
+// colors
+const colors = {
+  Africa: 'rgba(168,98,20,0.34)',
+  Asia: 'rgba(168,28,96,0.34)',
+  Europe: 'rgba(22,124,162,0.34)',
+  'North America': 'rgba(26,146,82,0.34)',
+  'South America': 'rgba(160,142,28,0.34)',
+  Oceania: 'rgba(108,36,152,0.34)',
+  Antarctica: 'rgba(132,142,156,0.30)'
+};
+
+const hoverColors = {
+  Africa: 'rgba(168,98,20,0.72)',
+  Asia: 'rgba(168,28,96,0.72)',
+  Europe: 'rgba(22,124,162,0.72)',
+  'North America': 'rgba(26,146,82,0.72)',
+  'South America': 'rgba(160,142,28,0.72)',
+  Oceania: 'rgba(108,36,152,0.72)',
+  Antarctica: 'rgba(132,142,156,0.66)'
+};
+
+const norm = s => s?.toLowerCase().trim();
+
+// 🔁 small alias table for name mismatches
+const alias = {
+  "united states of america": "united states",
+  "usa": "united states",
+  "u.s.a.": "united states",
+  "u.s.": "united states",
+  "england": "united kingdom",
+  "uk": "united kingdom",
+  "u.k.": "united kingdom",
+  "great britain": "united kingdom",
+  "russian federation": "russia",
+  "republic of serbia": "serbia",
+  "czech republic": "czechia",
+  "czech rep.": "czechia",
+  "cote d'ivoire": "ivory coast",
+  "côte d'ivoire": "ivory coast",
+  "congo (kinshasa)": "democratic republic of the congo",
+  "congo (brazzaville)": "republic of the congo",
+  "republic of the congo": "congo",
+  "democratic republic of the congo": "democratic republic of congo",
+  "dem. rep. congo": "democratic republic of congo",
+  "burkina faso": "burkina",
+  "united republic of tanzania": "tanzania",
+  "tanzania, united republic of": "tanzania",
+  "myanmar": "burma (myanmar)",
+  "myanmarr": "burma (myanmar)"
+};
+
+function resolveCountryName(rawName) {
+  const name = norm(rawName);
+  if (!name) return null;
+  if (continentMap[name]) return name;
+
+  const aliasName = alias[name];
+  if (aliasName && continentMap[aliasName]) return aliasName;
+
+  return name;
+}
+
+function continentToPath(continent) {
+  return `/${continent.toLowerCase().replace(/\s+/g, '-')}`;
+}
+
+let continentMap = {};
+let activeContinent = null;
+
+// 1) LOAD CSV
+fetch('Countries by continents.csv')
+  .then(r => r.text())
+  .then(text => {
+    const rows = text.split('\n').slice(1);
+    rows.forEach(row => {
+      const [continent, country] = row.split(',');
+      if (!country || !continent) return;
+      continentMap[norm(country)] = continent.trim();
+    });
+
+    // Antarctica is present in the GeoJSON but not in the CSV.
+    continentMap.antarctica = 'Antarctica';
+
+    init();
+  });
+
+// 2) INIT GLOBE WITH DATA
+function init() {
+  fetch('https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson')
+    .then(r => r.json())
+    .then(countries => {
+
+      world
+        .polygonsData(countries.features)
+        .polygonsTransitionDuration(140)
+
+        .polygonCapColor(d => {
+          const name = resolveCountryName(d.properties.name);
+          const cont = continentMap[name];
+
+          if (!activeContinent) return 'rgba(96,104,116,0.22)';
+
+          return cont === activeContinent
+            ? (hoverColors[cont] || 'rgba(140,150,165,0.65)')
+            : 'rgba(40,40,40,0.05)';
+        })
+
+        .polygonAltitude(d => {
+          const name = resolveCountryName(d.properties.name);
+          const cont = continentMap[name];
+          if (!activeContinent) return 0.008;
+          return cont === activeContinent ? 0.045 : 0.002;
+        })
+
+        .polygonSideColor(() => 'rgba(0,0,0,0)')
+        .polygonStrokeColor(() => 'rgba(0,0,0,0)')
+
+        .polygonLabel(d => {
+          const name = resolveCountryName(d.properties.name);
+          const cont = continentMap[name];
+          return cont ? `<b>${cont}</b>` : d.properties.name;
+        });
+
+      world.onPolygonHover(d => {
+        if (d) {
+          const name = resolveCountryName(d.properties.name);
+          activeContinent = continentMap[name] || null;
+        } else {
+          activeContinent = null;
+        }
+
+        world
+          .polygonCapColor(world.polygonCapColor())
+          .polygonAltitude(world.polygonAltitude());
+      });
+
+      world.onPolygonClick(d => {
+        if (!d) return;
+        const name = resolveCountryName(d.properties.name);
+        const cont = continentMap[name];
+        if (!cont) return;
+        window.location.href = continentToPath(cont);
+      });
+    });
+}
+
+world.pointOfView({ lat: 52, lng: -95, altitude: 1.72 });
+</script>
+
+</body>
+</html>

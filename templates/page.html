@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title }} | Atlas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Atlas</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/articles">Articles</a>
+      <a href="/infographics">Infographics</a>
+      <a href="/about">About</a>
+      <a href="/upload">Upload</a>
+    </nav>
+    <a class="subscribe-link" href="/#newsletter">Subscribe</a>
+  </header>
+
+  <main class="simple-page">
+    <span class="eyebrow">Atlas Desk</span>
+    <h1>{{ page.title }}</h1>
+    <p>{{ page.dek }}</p>
+    {% if page.title == "Articles" and articles %}
+    <div class="article-grid page-article-list">
+      {% for article in articles %}
+      <article class="article-card">
+        <div class="article-meta">
+          <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
+          <span>{{ article.category }}</span>
+        </div>
+        <h3><a href="/article/{{ article.slug }}">{{ article.title }}</a></h3>
+        <p>{{ article.summary }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <a class="back-link" href="/">Back to homepage</a>
+  </main>
+</body>
+</html>

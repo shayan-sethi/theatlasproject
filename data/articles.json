@@ -1,0 +1,32 @@
+[
+  {
+    "slug": "how-shipping-lanes-became-the-quiet-map-of-power",
+    "title": "How shipping lanes became the quiet map of power",
+    "continent": "africa",
+    "continent_name": "Africa",
+    "category": "Geopolitics",
+    "summary": "Trade routes, choke points, and the new geography of leverage.",
+    "body": "A sample Atlas briefing for the Africa desk. Replace this with your own reporting from the upload page.",
+    "created_at": "2026-05-19"
+  },
+  {
+    "slug": "the-cities-learning-to-live-with-hotter-nights",
+    "title": "The cities learning to live with hotter nights",
+    "continent": "europe",
+    "continent_name": "Europe",
+    "category": "Climate",
+    "summary": "A brief look at heat adaptation, public health, and urban design.",
+    "body": "A sample Atlas briefing for the Europe desk. Replace this with your own reporting from the upload page.",
+    "created_at": "2026-05-19"
+  },
+  {
+    "slug": "why-mineral-supply-chains-keep-moving-upstream",
+    "title": "Why mineral supply chains keep moving upstream",
+    "continent": "asia",
+    "continent_name": "Asia",
+    "category": "Markets",
+    "summary": "The global race behind batteries, grids, and industrial policy.",
+    "body": "A sample Atlas briefing for the Asia desk. Replace this with your own reporting from the upload page.",
+    "created_at": "2026-05-19"
+  }
+]

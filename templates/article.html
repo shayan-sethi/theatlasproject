@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ article.title }} | Atlas</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="continent-body {{ continent.theme }}" style="--continent-accent: {{ continent.accent }};">
+  <header class="site-header">
+    <a class="brand" href="/">Atlas</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/articles">Articles</a>
+      <a href="/infographics">Infographics</a>
+      <a href="/about">About</a>
+      <a href="/upload">Upload</a>
+    </nav>
+    <a class="subscribe-link" href="/#newsletter">Subscribe</a>
+  </header>
+
+  <main class="article-page">
+    <a class="back-link" href="/{{ article.continent }}">Back to {{ article.continent_name }}</a>
+    <div class="article-meta">
+      <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
+      <span>{{ article.category }}</span>
+      <span>{{ article.created_at }}</span>
+    </div>
+    <h1>{{ article.title }}</h1>
+    <p class="article-summary">{{ article.summary }}</p>
+    <article class="article-body">
+      {% for paragraph in article.body.split('\n') %}
+        {% if paragraph.strip() %}
+        <p>{{ paragraph }}</p>
+        {% endif %}
+      {% endfor %}
+    </article>
+  </main>
+</body>
+</html>

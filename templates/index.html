@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Atlas Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@600&family=Cinzel:wght@500;600&family=DM+Serif+Display&family=Marcellus&family=Montserrat+Alternates:wght@600&family=Orbitron:wght@600&family=Playfair+Display:wght@700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://cdn.jsdelivr.net/npm/globe.gl"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Atlas</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/articles">Articles</a>
+      <a href="/infographics">Infographics</a>
+      <a href="/about">About</a>
+      <a href="/upload">Upload</a>
+    </nav>
+    <div class="header-actions">
+      <details class="continent-menu">
+        <summary>Continents</summary>
+        <div class="continent-menu-panel">
+          <a href="/africa">Africa</a>
+          <a href="/asia">Asia</a>
+          <a href="/europe">Europe</a>
+          <a href="/north-america">North America</a>
+          <a href="/south-america">South America</a>
+          <a href="/oceania">Oceania</a>
+          <a href="/antarctica">Antarctica</a>
+        </div>
+      </details>
+      <a class="subscribe-link" href="#newsletter">Subscribe</a>
+    </div>
+  </header>
+
+  <main class="landing">
+    <section class="hero" aria-label="Interactive continent globe">
+      <div class="hero-copy">
+        <span class="eyebrow">News by continent</span>
+        <h1>Atlas</h1>
+        <p>Pick a region on the globe and read the stories shaping it. Atlas organizes world news by continent so the map is the front door, not an afterthought.</p>
+        <div class="hero-actions">
+          <a href="#continentDesk">Browse regions</a>
+          <a href="/articles">Latest articles</a>
+        </div>
+      </div>
+
+      <div class="globe-shell">
+        <div id="globeViz" data-csv-url="{{ url_for('continent_csv') }}"></div>
+        <div id="continentFocus" class="continent-focus" aria-live="polite">
+          <span class="focus-kicker">Explore</span>
+          <span class="focus-name">Choose a continent</span>
+        </div>
+      </div>
+
+      <div class="hint">Hover the globe - click a continent to enter its news desk</div>
+    </section>
+
+    <section class="continent-desk" id="continentDesk">
+      <div class="section-heading">
+        <span>Regional desks</span>
+        <h2>Seven doors into the news.</h2>
+      </div>
+      <div class="continent-links" aria-label="Continent news desks">
+        <a class="continent-link font-africa" href="/africa">Africa</a>
+        <a class="continent-link font-asia" href="/asia">Asia</a>
+        <a class="continent-link font-europe" href="/europe">Europe</a>
+        <a class="continent-link font-north-america" href="/north-america">North America</a>
+        <a class="continent-link font-south-america" href="/south-america">South America</a>
+        <a class="continent-link font-oceania" href="/oceania">Oceania</a>
+        <a class="continent-link font-antarctica" href="/antarctica">Antarctica</a>
+      </div>
+    </section>
+
+    <section class="section-band latest-section" id="articles">
+      <div class="section-heading">
+        <span>Latest</span>
+        <h2>Latest across the map.</h2>
+      </div>
+      <div class="article-grid">
+        {% for article in articles %}
+        <article class="article-card">
+          <div class="article-meta">
+            <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
+            <span>{{ article.category }}</span>
+          </div>
+          <h3><a href="/article/{{ article.slug }}">{{ article.title }}</a></h3>
+          <p>{{ article.summary }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="section-band visual-section" id="infographics">
+      <div class="section-heading">
+        <span>Visual Desk</span>
+        <h2>Visual briefings by region.</h2>
+      </div>
+      <div class="visual-grid">
+        <div class="metric-panel">
+          <span>01</span>
+          <strong>Regional explainers</strong>
+          <p>One-page context for the continent behind a headline.</p>
+        </div>
+        <div class="metric-panel">
+          <span>02</span>
+          <strong>Election trackers</strong>
+          <p>Timelines, candidates, coalitions, and pressure points.</p>
+        </div>
+        <div class="metric-panel">
+          <span>03</span>
+          <strong>Trade and climate maps</strong>
+          <p>Charts that make regional patterns easier to compare.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="newsletter-section" id="newsletter">
+      <div>
+        <span class="eyebrow">Weekly briefing</span>
+        <h2>Get the next Atlas edition.</h2>
+      </div>
+      <form class="newsletter-form">
+        <input type="email" placeholder="you@example.com" aria-label="Email address">
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
