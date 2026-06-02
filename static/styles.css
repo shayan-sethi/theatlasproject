@@ -87,9 +87,18 @@ a {
   gap: 10px;
 }
 
+/* When `subscribe-link` is placed directly in the header (no .header-actions wrapper),
+   prevent it from stretching to fill the grid column and keep it right-aligned. */
+.site-header > .subscribe-link {
+  justify-self: end;
+  align-self: center;
+  display: inline-flex;
+}
+
 .continent-menu {
   position: relative;
 }
+
 
 .continent-menu summary {
   display: inline-flex;

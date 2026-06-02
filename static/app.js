@@ -9,7 +9,7 @@ const world = new Globe(globeElement)
   .backgroundColor('rgba(0,0,0,0)');
 
 world.controls().autoRotate = true;
-world.controls().autoRotateSpeed = 0.78;
+world.controls().autoRotateSpeed = 2.2;
 world.controls().enableZoom = false;
 world.controls().enablePan = false;
 
@@ -152,7 +152,8 @@ function setActiveContinent(continent) {
   } else {
     focusClass = '';
     focusName.textContent = 'Choose a continent';
-    focusElement.classList.remove('is-visible');
+    // keep the focus element visible so the default prompt is always shown
+    focusElement.classList.add('is-visible');
     globeShell.classList.remove('is-focused');
     globeElement.classList.remove('is-clickable');
     document.documentElement.style.setProperty('--focus-accent', '#d7dee8');
@@ -226,3 +227,5 @@ function init() {
 }
 
 world.pointOfView({ lat: 52, lng: -95, altitude: 1.72 });
+// show the default focus message on load
+setActiveContinent(null);
