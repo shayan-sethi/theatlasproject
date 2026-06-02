@@ -13,7 +13,6 @@
       <a href="/articles">Articles</a>
       <a href="/infographics">Infographics</a>
       <a href="/about">About</a>
-      <a href="/upload">Upload</a>
     </nav>
     <a class="subscribe-link" href="/#newsletter">Subscribe</a>
   </header>
@@ -24,7 +23,7 @@
       <span class="eyebrow">Atlas regional desk</span>
       <h1>{{ continent.name }}</h1>
       <p>{{ continent.dek }}</p>
-      <a class="upload-cta" href="/upload">Upload to this desk</a>
+      
     </section>
 
     <section class="continent-articles">
@@ -49,8 +48,7 @@
       {% else %}
       <div class="empty-state">
         <h2>No articles here yet.</h2>
-        <p>Upload the first {{ continent.name }} briefing and it will appear on this regional desk.</p>
-        <a class="upload-cta" href="/upload">Upload article</a>
+        <p>There are no articles here yet. Check back later for updates from this regional desk.</p>
       </div>
       {% endif %}
     </section>

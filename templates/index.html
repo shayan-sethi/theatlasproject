@@ -17,7 +17,7 @@
       <a href="/articles">Articles</a>
       <a href="/infographics">Infographics</a>
       <a href="/about">About</a>
-      <a href="/upload">Upload</a>
+      
     </nav>
     <div class="header-actions">
       <details class="continent-menu">
@@ -123,8 +123,8 @@
         <span class="eyebrow">Weekly briefing</span>
         <h2>Get the next Atlas edition.</h2>
       </div>
-      <form class="newsletter-form">
-        <input type="email" placeholder="you@example.com" aria-label="Email address">
+      <form class="newsletter-form" action="{{ url_for('subscribe') }}" method="post">
+        <input name="email" type="email" placeholder="you@example.com" aria-label="Email address" required>
         <button type="submit">Subscribe</button>
       </form>
     </section>

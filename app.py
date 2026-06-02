@@ -106,46 +106,28 @@ def continent_csv():
     return send_from_directory(BASE_DIR, "Countries by continents.csv")
 
 
-@app.route("/upload", methods=["GET", "POST"])
-def upload_article():
-    if request.method == "POST":
-        title = request.form.get("title", "").strip()
-        continent = request.form.get("continent", "").strip()
-        category = request.form.get("category", "").strip()
-        summary = request.form.get("summary", "").strip()
-        body = request.form.get("body", "").strip()
+@app.route("/subscribe", methods=["POST"])
+def subscribe():
+    email = request.form.get("email", "").strip()
+    if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        return redirect(request.referrer or url_for("index"))
 
-        if not title or continent not in CONTINENTS or not summary or not body:
-            return render_template(
-                "upload.html",
-                continents=CONTINENTS,
-                error="Title, continent, summary, and article body are required.",
-                form=request.form,
-            ), 400
+    subs_path = DATA_DIR / "subscribers.json"
+    subscribers = []
+    if subs_path.exists():
+        try:
+            subscribers = json.loads(subs_path.read_text(encoding="utf-8"))
+        except Exception:
+            subscribers = []
 
-        articles = load_articles()
-        base_slug = slugify(title)
-        existing_slugs = {article["slug"] for article in articles}
-        slug = base_slug
-        count = 2
-        while slug in existing_slugs:
-            slug = f"{base_slug}-{count}"
-            count += 1
+    emails = {s.get("email") if isinstance(s, dict) else s for s in subscribers}
+    if email not in emails:
+        entry = {"email": email, "subscribed_at": datetime.now(timezone.utc).isoformat()}
+        subscribers.insert(0, entry)
+        DATA_DIR.mkdir(exist_ok=True)
+        subs_path.write_text(json.dumps(subscribers, indent=2), encoding="utf-8")
 
-        articles.insert(0, {
-            "slug": slug,
-            "title": title,
-            "continent": continent,
-            "continent_name": CONTINENTS[continent]["name"],
-            "category": category or "Briefing",
-            "summary": summary,
-            "body": body,
-            "created_at": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
-        })
-        save_articles(articles)
-        return redirect(url_for("continent", continent_slug=continent))
-
-    return render_template("upload.html", continents=CONTINENTS, error=None, form={})
+    return redirect(request.referrer or url_for("index"))
 
 
 @app.route("/article/<article_slug>")
