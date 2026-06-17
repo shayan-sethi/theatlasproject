@@ -1,32 +1,72 @@
 [
-  {
-    "slug": "how-shipping-lanes-became-the-quiet-map-of-power",
-    "title": "How shipping lanes became the quiet map of power",
-    "continent": "africa",
-    "continent_name": "Africa",
-    "category": "Geopolitics",
-    "summary": "Trade routes, choke points, and the new geography of leverage.",
-    "body": "A sample Atlas briefing for the Africa desk. Replace this with your own reporting.",
-    "created_at": "2026-05-19"
-  },
-  {
-    "slug": "the-cities-learning-to-live-with-hotter-nights",
-    "title": "The cities learning to live with hotter nights",
-    "continent": "europe",
-    "continent_name": "Europe",
-    "category": "Climate",
-    "summary": "A brief look at heat adaptation, public health, and urban design.",
-    "body": "A sample Atlas briefing for the Europe desk. Replace this with your own reporting.",
-    "created_at": "2026-05-19"
-  },
-  {
-    "slug": "why-mineral-supply-chains-keep-moving-upstream",
-    "title": "Why mineral supply chains keep moving upstream",
-    "continent": "asia",
-    "continent_name": "Asia",
-    "category": "Markets",
-    "summary": "The global race behind batteries, grids, and industrial policy.",
-    "body": "A sample Atlas briefing for the Asia desk. Replace this with your own reporting.",
-    "created_at": "2026-05-19"
-  }
+	{
+		"slug": "lagos-cooling-corridors-heat-plan",
+		"title": "Lagos Tests Cooling Corridors as Heat Peaks Earlier",
+		"summary": "City planners in Lagos are linking shaded transit routes with market districts to reduce dangerous afternoon heat exposure.",
+		"body": "## Why this pilot matters\n\nIn Lagos, municipal planners have started piloting so-called cooling corridors along heavily traveled routes between bus stops, markets, and clinics. The approach combines tree cover, reflective paving, and misting stations at key points where pedestrian traffic bunches during midday heat.\n\n### What the city is building\n\n- Shaded walkways along high-footfall routes\n- Reflective paving in market-adjacent streets\n- Misting stations near transport transfer points\n\nThe pilot began in two districts where wet-bulb temperatures have risen faster than historical norms in the last five years. Officials say they are not treating this as a beautification effort but as basic public health infrastructure, especially for informal workers who spend most of the day outdoors.\n\n> This is transport and health policy in one design problem, one local planner said during the rollout briefing.\n\n---\n\nUrban researchers following the rollout say the project could become a model for other West African cities if maintenance holds. The immediate test is whether local authorities can keep water access and shade structures functioning through peak season rather than launching and abandoning them after the first announcement cycle.",
+		"category": "Climate",
+		"continent": "africa",
+		"continent_name": "Africa",
+		"created_at": "June 18, 2026"
+	},
+	{
+		"slug": "seoul-night-freight-lanes-supply-chain",
+		"title": "Seoul Expands Night Freight Lanes to Unclog Daytime Traffic",
+		"summary": "A new logistics window in Seoul aims to cut daytime congestion while stabilizing delivery times for small manufacturers.",
+		"body": "Seoul transport officials have expanded dedicated overnight freight lanes in an effort to move wholesale and industrial traffic out of peak commuter hours. The program is focused on zones where delivery trucks, buses, and private vehicles currently compete for limited road space in the morning.\n\nSmall manufacturers and warehouse operators say predictable overnight slots may reduce missed handoffs and warehouse bottlenecks, especially for electronics and light machinery suppliers working on narrow margins. Labor unions, however, have raised concerns about shift pressure and fatigue risks if schedules are expanded too aggressively.\n\nCity planners say the first quarter of data will determine whether the lanes are made permanent. Analysts are watching average delivery variance more than headline travel speed, arguing that reliability is the stronger signal for supply-chain resilience.",
+		"category": "Infrastructure",
+		"continent": "asia",
+		"continent_name": "Asia",
+		"created_at": "June 17, 2026"
+	},
+	{
+		"slug": "berlin-grid-flex-markets-energy",
+		"title": "Berlin Trials Local Flex Markets to Balance Evening Power Demand",
+		"summary": "Neighborhood-level energy auctions in Berlin are testing whether households can be paid to shift demand away from evening peaks.",
+		"body": "Berlin energy operators are running local flexibility markets that reward households and small businesses for reducing consumption during short peak windows. Residents can opt in through utility apps and receive small payouts when automated systems delay nonessential loads.\n\nThe city sees the trial as a practical bridge between climate targets and grid reliability. Instead of relying only on large-scale generation upgrades, planners are testing whether distributed behavior changes can shave enough demand to avoid expensive short-term interventions.\n\nConsumer groups support the pilot but want clearer rules about billing transparency and opt-out rights. If participation remains high through winter, officials say the model could be expanded to additional districts with different housing profiles.",
+		"category": "Energy",
+		"continent": "europe",
+		"continent_name": "Europe",
+		"created_at": "June 16, 2026"
+	},
+	{
+		"slug": "toronto-housing-transit-zones",
+		"title": "Toronto Links Housing Permits to Transit Frequency Targets",
+		"summary": "Toronto is tying approvals for major housing projects to guaranteed service levels on nearby bus and rail corridors.",
+		"body": "Toronto officials have introduced a policy that pairs large residential approvals with minimum transit frequency commitments in surrounding corridors. The move is designed to avoid a recurring pattern where housing comes online years before transportation capacity catches up.\n\nDevelopers and planners describe the framework as a sequencing tool: permits can proceed, but staged occupancy depends on transit readiness benchmarks that are measured publicly. Municipal staff argue this creates stronger coordination between land-use decisions and operating budgets.\n\nCritics warn the approach could slow urgently needed housing if agencies miss service targets. City council members backing the policy say transparent timelines should reduce uncertainty and improve trust in project delivery.",
+		"category": "Urban Policy",
+		"continent": "north-america",
+		"continent_name": "North America",
+		"created_at": "June 15, 2026"
+	},
+	{
+		"slug": "bogota-hillside-water-monitoring",
+		"title": "Bogota Deploys Hillside Sensors to Track Dry-Season Water Loss",
+		"summary": "A sensor network across peri-urban slopes is helping Bogota detect leaks and pressure drops before neighborhoods lose service.",
+		"body": "Water utilities in Bogota have started deploying low-cost pressure and moisture sensors in hillside infrastructure where dry-season losses are hardest to detect. Engineers say topography and informal extensions can hide persistent leaks until service failures become visible at street level.\n\nThe new monitoring layer feeds a shared dashboard used by utility teams and district coordinators. By flagging anomalies earlier, crews can prioritize repair routes and reduce emergency truck deployments that strain already tight budgets.\n\nPublic policy observers note that technical fixes alone will not solve long-term scarcity. Still, the city considers this a high-impact operational step that can improve reliability while broader watershed and demand measures take shape.",
+		"category": "Water",
+		"continent": "south-america",
+		"continent_name": "South America",
+		"created_at": "June 14, 2026"
+	},
+	{
+		"slug": "fiji-port-upgrades-pacific-trade",
+		"title": "Fiji Prioritizes Mid-Scale Port Upgrades for Inter-Island Trade",
+		"summary": "Rather than one flagship terminal, Fiji is investing in smaller port improvements to speed domestic and regional cargo circulation.",
+		"body": "Fiji has announced a phased plan to modernize several mid-scale ports, focusing on loading equipment, storage safety, and weather resilience. Officials say the goal is to improve inter-island reliability first, then connect those gains to wider Pacific trade routes.\n\nShipping operators report that uneven infrastructure across smaller ports often causes delays that ripple through the entire network. Targeted upgrades, they argue, can reduce spoilage risk and improve delivery consistency for food, medicine, and construction materials.\n\nRegional economists view the strategy as pragmatic in a climate-exposed environment where concentration risk is high. Distributed upgrades may offer slower headline growth but better continuity when storms disrupt major hubs.",
+		"category": "Trade",
+		"continent": "oceania",
+		"continent_name": "Oceania",
+		"created_at": "June 13, 2026"
+	},
+	{
+		"slug": "antarctic-winter-logistics-fuel-efficiency",
+		"title": "Antarctic Stations Coordinate Winter Flights to Cut Fuel Burn",
+		"summary": "Research programs are consolidating seasonal air logistics in Antarctica to reduce duplication and improve weather-window planning.",
+		"body": "Several research programs operating in Antarctica are coordinating winter flight schedules for the first time under a shared logistics framework. The aim is to reduce duplicate routes, lower fuel consumption, and improve contingency planning during narrow weather windows.\n\nProgram managers say the cooperative model also improves cargo prioritization when conditions deteriorate quickly. Medical supplies, communication equipment, and power-system components can be moved through a unified queue rather than separate national requests.\n\nPolar policy analysts caution that governance details will determine durability, especially around cost-sharing and data access. Even so, the early coordination effort is being treated as a practical signal that scientific logistics can adapt to tightening climate and budget constraints.",
+		"category": "Science",
+		"continent": "antarctica",
+		"continent_name": "Antarctica",
+		"created_at": "June 12, 2026"
+	}
 ]

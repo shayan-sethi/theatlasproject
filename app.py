@@ -1,8 +1,13 @@
 import json
 import re
 from datetime import datetime, timezone
+from html import escape
 from pathlib import Path
 
+try:
+    import markdown
+except ModuleNotFoundError:
+    markdown = None
 from flask import Flask, abort, redirect, render_template, request, send_from_directory, url_for
 
 
@@ -96,6 +101,18 @@ def articles_for_continent(continent_slug):
     ]
 
 
+def render_article_body(markdown_text):
+    if markdown is None:
+        paragraphs = [part.strip() for part in (markdown_text or "").split("\n\n") if part.strip()]
+        return "".join(f"<p>{escape(paragraph)}</p>" for paragraph in paragraphs)
+
+    return markdown.markdown(
+        markdown_text or "",
+        extensions=["extra", "sane_lists", "nl2br"],
+        output_format="html5",
+    )
+
+
 @app.route("/")
 def index():
     return render_template("index.html", articles=load_articles()[:3])
@@ -139,7 +156,13 @@ def article_detail(article_slug):
     if not article:
         abort(404)
     continent = CONTINENTS.get(article["continent"])
-    return render_template("article.html", article=article, continent=continent)
+    article_body_html = render_article_body(article.get("body", ""))
+    return render_template(
+        "article.html",
+        article=article,
+        continent=continent,
+        article_body_html=article_body_html,
+    )
 
 
 @app.route("/<continent_slug>")

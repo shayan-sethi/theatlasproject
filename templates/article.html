@@ -41,11 +41,7 @@
     <h1>{{ article.title }}</h1>
     <p class="article-summary">{{ article.summary }}</p>
     <article class="article-body">
-      {% for paragraph in article.body.split('\n') %}
-        {% if paragraph.strip() %}
-        <p>{{ paragraph }}</p>
-        {% endif %}
-      {% endfor %}
+      {{ article_body_html|safe }}
     </article>
   </main>
 </body>
