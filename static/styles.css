@@ -378,17 +378,10 @@ a {
 .focus-name {
   display: block;
   color: var(--focus-accent);
+  font-family: "Cinzel", Georgia, serif;
   font-size: clamp(27px, 5vw, 54px);
   line-height: 0.98;
 }
-
-.font-africa { font-family: "Alegreya SC", Georgia, serif; }
-.font-asia { font-family: "Orbitron", "Segoe UI", sans-serif; }
-.font-europe { font-family: "Playfair Display", Georgia, serif; }
-.font-north-america { font-family: "Montserrat Alternates", "Segoe UI", sans-serif; }
-.font-south-america { font-family: "DM Serif Display", Georgia, serif; }
-.font-oceania { font-family: "Marcellus", Georgia, serif; }
-.font-antarctica { font-family: "Rajdhani", "Segoe UI", sans-serif; }
 
 .hint {
   position: absolute;
@@ -446,6 +439,7 @@ a {
   border-radius: 999px;
   color: var(--ink);
   text-decoration: none;
+  font-family: "Cinzel", Georgia, serif;
   font-size: clamp(20px, 2.5vw, 34px);
   background: rgba(255, 255, 255, 0.035);
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;

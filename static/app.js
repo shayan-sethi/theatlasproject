@@ -106,13 +106,8 @@ function continentToPath(continent) {
   return `/${continent.toLowerCase().replace(/\s+/g, '-')}`;
 }
 
-function continentToFontClass(continent) {
-  return `font-${continent.toLowerCase().replace(/\s+/g, '-')}`;
-}
-
 let continentMap = {};
 let activeContinent = null;
-let focusClass = '';
 
 function setSpin(isSpinning) {
   world.controls().autoRotate = isSpinning;
@@ -137,11 +132,7 @@ function setActiveContinent(continent) {
   if (activeContinent === continent) return;
   activeContinent = continent;
 
-  if (focusClass) focusName.classList.remove(focusClass);
-
   if (continent) {
-    focusClass = continentToFontClass(continent);
-    focusName.classList.add(focusClass);
     focusName.textContent = continent;
     focusElement.classList.add('is-visible');
     globeShell.classList.add('is-focused');
@@ -150,7 +141,6 @@ function setActiveContinent(continent) {
     setSpin(false);
     world.pointOfView(continentCenters[continent] || { lat: 52, lng: -95, altitude: 1.72 }, 850);
   } else {
-    focusClass = '';
     focusName.textContent = 'Choose a continent';
     // keep the focus element visible so the default prompt is always shown
     focusElement.classList.add('is-visible');
@@ -203,7 +193,7 @@ function init() {
           const name = resolveCountryName(d.properties.name);
           const cont = continentMap[name];
           if (!cont) return d.properties.name;
-          return `<span class="${continentToFontClass(cont)}">${cont}</span>`;
+          return `<span>${cont}</span>`;
         });
 
       world.onPolygonHover(d => {
