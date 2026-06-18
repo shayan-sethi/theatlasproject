@@ -149,19 +149,37 @@ def subscribe():
 
 @app.route("/article/<article_slug>")
 def article_detail(article_slug):
+    articles = load_articles()
     article = next(
-        (item for item in load_articles() if item.get("slug") == article_slug),
+        (item for item in articles if item.get("slug") == article_slug),
         None,
     )
     if not article:
         abort(404)
     continent = CONTINENTS.get(article["continent"])
     article_body_html = render_article_body(article.get("body", ""))
+    
+    # Fetch related articles from the same continent first
+    related = [
+        item for item in articles
+        if item.get("continent") == article["continent"] and item.get("slug") != article_slug
+    ][:2]
+    
+    # If we need more to make it 2, fill with other recent articles
+    if len(related) < 2:
+        used_slugs = {item["slug"] for item in related} | {article_slug}
+        others = [
+            item for item in articles
+            if item.get("slug") not in used_slugs
+        ]
+        related.extend(others[:(2 - len(related))])
+
     return render_template(
         "article.html",
         article=article,
         continent=continent,
         article_body_html=article_body_html,
+        related_articles=related,
     )
 
 

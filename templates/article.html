@@ -33,16 +33,40 @@
 
   <main class="article-page">
     <a class="back-link" href="/{{ article.continent }}">Back to {{ article.continent_name }}</a>
-    <div class="article-meta">
-      <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
-      <span>{{ article.category }}</span>
-      <span>{{ article.created_at }}</span>
-    </div>
-    <h1>{{ article.title }}</h1>
-    <p class="article-summary">{{ article.summary }}</p>
+    <header class="article-header">
+      <div class="article-meta">
+        <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
+        <span class="category-tag">{{ article.category }}</span>
+        <span class="date-tag">{{ article.created_at }}</span>
+      </div>
+      <h1>{{ article.title }}</h1>
+      <p class="article-summary">{{ article.summary }}</p>
+    </header>
+
     <article class="article-body">
       {{ article_body_html|safe }}
     </article>
+
+    {% if related_articles %}
+    <section class="read-next-section">
+      <div class="read-next-header">
+        <span class="kicker">Read Next</span>
+        <h2>Keep exploring.</h2>
+      </div>
+      <div class="read-next-grid">
+        {% for rel in related_articles %}
+        <article class="read-next-card">
+          <div class="card-meta">
+            <span class="card-region">{{ rel.continent_name }}</span>
+            <span class="card-category">{{ rel.category }}</span>
+          </div>
+          <h3><a href="/article/{{ rel.slug }}">{{ rel.title }}</a></h3>
+          <p>{{ rel.summary }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
   </main>
 </body>
 </html>
