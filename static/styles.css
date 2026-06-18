@@ -510,6 +510,11 @@ a {
   line-height: 1.05;
 }
 
+.article-card h3 a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .article-card p {
   margin: 0;
   color: var(--soft);
@@ -922,6 +927,19 @@ a {
 .article-body a {
   color: color-mix(in srgb, var(--continent-accent, #7edce2), white 34%);
   text-underline-offset: 2px;
+  text-decoration: none;
+}
+
+/* Disable decorative animated underline applied via JS/tsx component */
+.text-decoration-animate::after {
+  display: none !important;
+}
+
+/* Ensure heading links don't show underlines */
+.section-heading h2 a,
+.article-card h3 a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .article-body hr {
