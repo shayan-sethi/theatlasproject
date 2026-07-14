@@ -132,12 +132,14 @@ function setActiveContinent(continent) {
   if (activeContinent === continent) return;
   activeContinent = continent;
 
+  const defaultColor = document.documentElement.classList.contains('dark-theme') ? '#d7dee8' : '#a0b5c9';
+
   if (continent) {
     focusName.textContent = continent;
     focusElement.classList.add('is-visible');
     globeShell.classList.add('is-focused');
     globeElement.classList.add('is-clickable');
-    document.documentElement.style.setProperty('--focus-accent', accentColors[continent] || '#d7dee8');
+    document.documentElement.style.setProperty('--focus-accent', accentColors[continent] || defaultColor);
     setSpin(false);
     world.pointOfView(continentCenters[continent] || { lat: 52, lng: -95, altitude: 1.72 }, 850);
   } else {
@@ -146,7 +148,7 @@ function setActiveContinent(continent) {
     focusElement.classList.add('is-visible');
     globeShell.classList.remove('is-focused');
     globeElement.classList.remove('is-clickable');
-    document.documentElement.style.setProperty('--focus-accent', '#d7dee8');
+    document.documentElement.style.setProperty('--focus-accent', defaultColor);
     setSpin(true);
   }
 
@@ -219,3 +221,10 @@ function init() {
 world.pointOfView({ lat: 52, lng: -95, altitude: 1.72 });
 // show the default focus message on load
 setActiveContinent(null);
+
+window.addEventListener('theme-changed', (e) => {
+  if (!activeContinent) {
+    const defaultColor = e.detail.theme === 'dark' ? '#d7dee8' : '#a0b5c9';
+    document.documentElement.style.setProperty('--focus-accent', defaultColor);
+  }
+});

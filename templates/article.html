@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ article.title }} | Atlas</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='theme.js') }}"></script>
 </head>
 <body class="continent-body {{ continent.theme }}" style="--continent-accent: {{ continent.accent }};">
   <header class="site-header">
@@ -15,6 +16,10 @@
       <a href="/about">About</a>
     </nav>
     <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+      </button>
       <details class="continent-menu">
         <summary>Continents</summary>
         <div class="continent-menu-panel">
@@ -36,7 +41,6 @@
     <header class="article-header">
       <div class="article-meta">
         <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
-        <span class="category-tag">{{ article.category }}</span>
         <span class="date-tag">{{ article.created_at }}</span>
       </div>
       <h1>{{ article.title }}</h1>
@@ -58,7 +62,6 @@
         <article class="read-next-card">
           <div class="card-meta">
             <span class="card-region">{{ rel.continent_name }}</span>
-            <span class="card-category">{{ rel.category }}</span>
           </div>
           <h3><a href="/article/{{ rel.slug }}">{{ rel.title }}</a></h3>
           <p>{{ rel.summary }}</p>
