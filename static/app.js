@@ -29,7 +29,7 @@ const colors = {
   'North America': 'rgba(118,184,142,0.36)',
   'South America': 'rgba(212,176,86,0.36)',
   Oceania: 'rgba(176,136,214,0.36)',
-  Antarctica: 'rgba(190,214,226,0.32)'
+  'Atlas Arguments': 'rgba(190,214,226,0.32)'
 };
 
 const hoverColors = {
@@ -39,7 +39,7 @@ const hoverColors = {
   'North America': 'rgba(139,210,164,0.84)',
   'South America': 'rgba(230,196,106,0.84)',
   Oceania: 'rgba(198,158,232,0.84)',
-  Antarctica: 'rgba(214,232,238,0.78)'
+  'Atlas Arguments': 'rgba(214,232,238,0.78)'
 };
 
 const accentColors = {
@@ -49,7 +49,7 @@ const accentColors = {
   'North America': '#8bd2a4',
   'South America': '#e6c46a',
   Oceania: '#c69ee8',
-  Antarctica: '#d6e8ee'
+  'Atlas Arguments': '#d6e8ee'
 };
 
 const continentCenters = {
@@ -59,7 +59,7 @@ const continentCenters = {
   'North America': { lat: 48, lng: -104, altitude: 1.66 },
   'South America': { lat: -18, lng: -61, altitude: 1.62 },
   Oceania: { lat: -24, lng: 135, altitude: 1.72 },
-  Antarctica: { lat: -78, lng: 15, altitude: 1.9 }
+  'Atlas Arguments': { lat: -78, lng: 15, altitude: 1.9 }
 };
 
 const norm = s => s?.toLowerCase().trim();
@@ -123,7 +123,7 @@ fetch(globeElement.dataset.csvUrl)
       continentMap[norm(country)] = continent.trim();
     });
 
-    continentMap.antarctica = 'Antarctica';
+    continentMap.antarctica = 'Atlas Arguments';
 
     init();
   });

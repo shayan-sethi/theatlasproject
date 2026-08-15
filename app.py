@@ -52,12 +52,7 @@ CONTINENTS = {
         "accent": "#c69ee8",
         "theme": "theme-oceania",
     },
-    "antarctica": {
-        "name": "Antarctica",
-        "dek": "Science, climate signals, logistics, and geopolitics from the southern ice.",
-        "accent": "#d6e8ee",
-        "theme": "theme-antarctica",
-    },
+
 }
 
 PAGES = {
