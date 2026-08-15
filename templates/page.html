@@ -44,11 +44,9 @@
     <div class="article-grid page-article-list">
       {% for article in articles %}
       <article class="article-card{% if page.title == 'Atlas Arguments' %} argument-card{% endif %}">
-        {% if page.title != "Atlas Arguments" %}
         <div class="article-meta">
           <a class="region-tag" href="/{{ article.continent }}">{{ article.continent_name }}</a>
         </div>
-        {% endif %}
         <h3><a href="/article/{{ article.slug }}">{{ article.title }}</a></h3>
         {% if page.title != "Atlas Arguments" %}
         <p>{{ article.summary }}</p>

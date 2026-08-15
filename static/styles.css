@@ -668,7 +668,11 @@ a {
 }
 
 .article-card.argument-card {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(160px, 0.34fr) 1fr minmax(160px, 0.34fr);
+}
+
+.article-card.argument-card h3 {
+  text-align: center;
 }
 
 .article-meta {
