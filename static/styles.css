@@ -667,6 +667,10 @@ a {
   border-bottom: 1px solid var(--line);
 }
 
+.article-card.argument-card {
+  grid-template-columns: 1fr;
+}
+
 .article-meta {
   display: flex;
   flex-wrap: wrap;
