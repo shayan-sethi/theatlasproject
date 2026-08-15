@@ -12,7 +12,7 @@
     <a class="brand" href="/">Atlas</a>
     <nav class="site-nav" aria-label="Primary navigation">
       <a href="/articles">Articles</a>
-      <a href="/infographics">Infographics</a>
+      <a href="/atlas-arguments">Atlas Arguments</a>
       <a href="/about">About</a>
     </nav>
     <div class="header-actions">
@@ -40,7 +40,7 @@
     <span class="eyebrow">Atlas Desk</span>
     <h1>{{ page.title }}</h1>
     <p>{{ page.dek }}</p>
-    {% if page.title == "Articles" and articles %}
+    {% if page.title in ["Articles", "Atlas Arguments"] and articles %}
     <div class="article-grid page-article-list">
       {% for article in articles %}
       <article class="article-card">

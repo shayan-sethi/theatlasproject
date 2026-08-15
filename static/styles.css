@@ -812,6 +812,7 @@ a {
   font-family: "Cinzel", Georgia, serif;
   font-size: clamp(44px, 10vw, 120px);
   letter-spacing: 0.04em;
+  line-height: 0.95;
 }
 
 .simple-page p {

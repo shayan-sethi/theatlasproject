@@ -65,9 +65,9 @@ PAGES = {
         "title": "Articles",
         "dek": "Field notes, briefings, and long-form analysis from the Atlas desk.",
     },
-    "infographics": {
-        "title": "Infographics",
-        "dek": "Visual explainers for the numbers, places, and systems shaping the world.",
+    "atlas-arguments": {
+        "title": "Atlas Arguments",
+        "dek": "Debates and perspectives on complex global issues.",
     },
     "about": {
         "title": "About Atlas",
@@ -187,7 +187,14 @@ def article_detail(article_slug):
 def continent(continent_slug):
     page = PAGES.get(continent_slug)
     if page:
-        return render_template("page.html", page=page, articles=load_articles())
+        all_articles = load_articles()
+        if continent_slug == "atlas-arguments":
+            articles = [a for a in all_articles if a.get("type") == "argument"]
+        elif continent_slug == "articles":
+            articles = [a for a in all_articles if a.get("type", "article") == "article"]
+        else:
+            articles = all_articles
+        return render_template("page.html", page=page, articles=articles)
 
     continent_data = CONTINENTS.get(continent_slug)
     if not continent_data:
