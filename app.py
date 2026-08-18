@@ -8,7 +8,9 @@ try:
     import markdown
 except ModuleNotFoundError:
     markdown = None
-from flask import Flask, abort, redirect, render_template, request, send_from_directory, url_for
+from flask import Flask, abort, jsonify, redirect, render_template, request, send_from_directory, url_for
+
+from email_service import notify_subscribers_async, send_welcome_email_async
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -135,9 +137,19 @@ def subscribe():
     emails = {s.get("email") if isinstance(s, dict) else s for s in subscribers}
     if email not in emails:
         entry = {"email": email, "subscribed_at": datetime.now(timezone.utc).isoformat()}
-        subscribers.insert(0, entry)
-        DATA_DIR.mkdir(exist_ok=True)
-        subs_path.write_text(json.dumps(subscribers, indent=2), encoding="utf-8")
+        try:
+            DATA_DIR.mkdir(exist_ok=True)
+            subs_path.write_text(json.dumps(subscribers, indent=2), encoding="utf-8")
+        except Exception:
+            import tempfile
+            tmp_path = Path(tempfile.gettempdir()) / "subscribers.json"
+            try:
+                tmp_path.write_text(json.dumps(subscribers, indent=2), encoding="utf-8")
+            except Exception:
+                pass
+
+        # Send welcome email in the background
+        send_welcome_email_async(email)
 
     return redirect(request.referrer or url_for("index"))
 
@@ -205,6 +217,21 @@ def continent(continent_slug):
         continent_slug=continent_slug,
         articles=articles_for_continent(continent_slug),
     )
+
+
+@app.route("/notify/<article_slug>", methods=["POST"])
+def notify(article_slug):
+    """Trigger a briefing email to all subscribers for the given article."""
+    articles = load_articles()
+    article = next(
+        (item for item in articles if item.get("slug") == article_slug),
+        None,
+    )
+    if not article:
+        abort(404)
+
+    notify_subscribers_async(article)
+    return jsonify({"status": "ok", "message": f"Notifying subscribers about: {article['title']}"})
 
 
 if __name__ == "__main__":

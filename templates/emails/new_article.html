@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body style="margin:0; padding:0; background-color:#f9f8f6; font-family:Georgia, 'Times New Roman', serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f9f8f6; padding:40px 20px;">
+    <tr>
+      <td align="center">
+        <table width="600" cellpadding="0" cellspacing="0" style="background-color:#ffffff; border-radius:12px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.06);">
+
+          <!-- Header -->
+          <tr>
+            <td style="padding:36px 40px 24px; text-align:center; border-bottom:1px solid #eee;">
+              <h1 style="margin:0; font-family:Georgia, serif; font-size:28px; font-weight:600; letter-spacing:0.06em; color:#2b2e35;">ATLAS</h1>
+              <p style="margin:8px 0 0; font-family:'Segoe UI', Helvetica, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#9ca3af;">
+                Atlas Briefing
+              </p>
+            </td>
+          </tr>
+
+          <!-- Continent Tag -->
+          <tr>
+            <td style="padding:28px 40px 0;">
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="padding:6px 14px; border:1px solid #e5e7eb; border-radius:999px; font-family:'Segoe UI', Helvetica, Arial, sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6b7280;">
+                    {{ continent_name }}
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Article Content -->
+          <tr>
+            <td style="padding:20px 40px 12px;">
+              <h2 style="margin:0 0 16px; font-family:Georgia, serif; font-size:26px; font-weight:700; color:#2b2e35; line-height:1.2;">
+                {{ article_title }}
+              </h2>
+              <p style="margin:0 0 28px; font-size:17px; line-height:1.65; color:#4a4e58;">
+                {{ article_summary }}
+              </p>
+
+              <!-- CTA Button -->
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="background-color:#2b2e35; border-radius:999px;">
+                    <a href="{{ article_url }}" target="_blank" style="display:inline-block; padding:14px 32px; font-family:'Segoe UI', Helvetica, Arial, sans-serif; font-size:13px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#ffffff; text-decoration:none;">
+                      Read on Atlas →
+                    </a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:28px 40px 0;">
+              <hr style="border:none; border-top:1px solid #eee; margin:0;">
+            </td>
+          </tr>
+
+          <!-- Site Link / Briefing Note -->
+          <tr>
+            <td style="padding:20px 40px 8px;">
+              <p style="margin:0; font-size:15px; line-height:1.6; color:#6b7280;">
+                This briefing is from <a href="{{ site_url }}" style="color:#2b2e35; text-decoration:underline; font-weight:600;">The Atlas Project</a> — an editorial project exploring politics, theory, and global affairs through a geographical lens. Visit the site to browse all articles by continent.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:20px 40px 28px; text-align:center;">
+              <p style="margin:0; font-family:'Segoe UI', Helvetica, Arial, sans-serif; font-size:12px; color:#9ca3af; letter-spacing:0.04em;">
+                The Atlas Project · <a href="{{ site_url }}" style="color:#6b7280; text-decoration:underline;">theatlasproject</a>
+              </p>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
