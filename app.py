@@ -10,7 +10,7 @@ except ModuleNotFoundError:
     markdown = None
 from flask import Flask, abort, jsonify, redirect, render_template, request, send_from_directory, url_for
 
-from email_service import notify_subscribers_async, send_welcome_email, send_welcome_email_async
+from email_service import notify_subscribers, notify_subscribers_async, send_welcome_email, send_welcome_email_async
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -252,8 +252,12 @@ def notify(article_slug):
     if not article:
         abort(404)
 
-    notify_subscribers_async(article)
-    return jsonify({"status": "ok", "message": f"Notifying subscribers about: {article['title']}"})
+    res = notify_subscribers(article)
+    return jsonify({
+        "status": "ok",
+        "message": f"Notifying subscribers about: {article['title']}",
+        "result": res
+    })
 
 
 if __name__ == "__main__":
