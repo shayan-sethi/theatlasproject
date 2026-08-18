@@ -10,7 +10,7 @@ except ModuleNotFoundError:
     markdown = None
 from flask import Flask, abort, jsonify, redirect, render_template, request, send_from_directory, url_for
 
-from email_service import notify_subscribers_async, send_welcome_email_async
+from email_service import notify_subscribers_async, send_welcome_email, send_welcome_email_async
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -153,8 +153,11 @@ def subscribe():
             except Exception:
                 pass
 
-        # Send welcome email in the background
-        send_welcome_email_async(email)
+        # Send welcome email synchronously for serverless compatibility
+        try:
+            send_welcome_email(email)
+        except Exception:
+            pass
 
     if is_ajax:
         return jsonify({

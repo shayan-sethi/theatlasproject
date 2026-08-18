@@ -121,13 +121,22 @@ def _load_subscribers():
 # ── Public API ───────────────────────────────────────────────
 
 def send_welcome_email(to_email):
-    """Send a branded welcome email to a new subscriber."""
+    """Send a branded welcome email to a new subscriber, and alert admin."""
     try:
         html = _render_template(
             "welcome.html",
             site_url=_site_url(),
         )
         _send_email(to_email, "Welcome to The Atlas Project", html)
+
+        # Admin alert so subscriber email is permanently saved in Gmail inbox
+        cfg = _smtp_config()
+        if cfg["email"] and to_email != cfg["email"]:
+            admin_body = f"""<div style="font-family: sans-serif; padding: 20px;">
+              <h2>New Subscriber Notification</h2>
+              <p><strong>{to_email}</strong> just subscribed to The Atlas Project!</p>
+            </div>"""
+            _send_email(cfg["email"], f"New Subscriber: {to_email}", admin_body)
     except Exception:
         logger.exception("Failed to send welcome email to %s", to_email)
 
