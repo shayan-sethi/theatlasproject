@@ -60,7 +60,7 @@ def _site_url():
 
 
 def _send_email(to_email, subject, html_body):
-    """Send a single HTML email via SMTP. Raises on failure."""
+    """Send a single HTML email via SMTP. Tries STARTTLS on 587 then SSL on 465."""
     cfg = _smtp_config()
     if not cfg["email"] or not cfg["password"]:
         logger.warning("SMTP credentials not configured — skipping email to %s", to_email)
@@ -76,12 +76,23 @@ def _send_email(to_email, subject, html_body):
     msg.attach(MIMEText(plain, "plain"))
     msg.attach(MIMEText(html_body, "html"))
 
-    with smtplib.SMTP(cfg["server"], cfg["port"], timeout=5) as smtp:
-        smtp.ehlo()
-        smtp.starttls()
-        smtp.ehlo()
-        smtp.login(cfg["email"], cfg["password"])
-        smtp.sendmail(cfg["email"], to_email, msg.as_string())
+    try:
+        if cfg["port"] == 465:
+            with smtplib.SMTP_SSL(cfg["server"], 465, timeout=8) as smtp:
+                smtp.login(cfg["email"], cfg["password"])
+                smtp.sendmail(cfg["email"], to_email, msg.as_string())
+        else:
+            with smtplib.SMTP(cfg["server"], cfg["port"], timeout=8) as smtp:
+                smtp.ehlo()
+                smtp.starttls()
+                smtp.ehlo()
+                smtp.login(cfg["email"], cfg["password"])
+                smtp.sendmail(cfg["email"], to_email, msg.as_string())
+    except Exception as e:
+        logger.warning("Primary SMTP send on port %s failed (%s), trying SSL on port 465...", cfg["port"], e)
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=8) as smtp:
+            smtp.login(cfg["email"], cfg["password"])
+            smtp.sendmail(cfg["email"], to_email, msg.as_string())
 
     logger.info("Email sent to %s: %s", to_email, subject)
 
