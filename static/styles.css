@@ -802,6 +802,58 @@ a {
   border-color: #23252d;
 }
 
+.newsletter-form-shell {
+  width: 100%;
+}
+
+.subscribe-success-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 22px;
+  border-radius: 999px;
+  background: var(--panel);
+  border: 1px solid color-mix(in srgb, var(--focus-accent, #7edce2), transparent 50%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  animation: fadeInSuccess 280ms ease-out forwards;
+}
+
+.subscribe-success-card svg {
+  color: var(--focus-accent, #7edce2);
+  flex-shrink: 0;
+}
+
+.subscribe-success-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.subscribe-success-text strong {
+  font-family: var(--ui-font);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  letter-spacing: 0.02em;
+}
+
+.subscribe-success-text span {
+  font-family: var(--ui-font);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@keyframes fadeInSuccess {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .simple-page {
   min-height: 100vh;
   display: grid;

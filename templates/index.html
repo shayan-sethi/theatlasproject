@@ -103,10 +103,35 @@
         <span class="eyebrow">Weekly briefing</span>
         <h2>Get the next Atlas edition.</h2>
       </div>
-      <form class="newsletter-form" action="{{ url_for('subscribe') }}" method="post">
-        <input name="email" type="email" placeholder="you@example.com" aria-label="Email address" required>
-        <button type="submit">Subscribe</button>
-      </form>
+      <div class="newsletter-form-shell">
+        {% if request.args.get('subscribed') %}
+        <div class="subscribe-success-card">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <div class="subscribe-success-text">
+            <strong>You're subscribed!</strong>
+            <span>Check your inbox for a welcome briefing.</span>
+          </div>
+        </div>
+        {% else %}
+        <form class="newsletter-form" id="newsletterForm" action="{{ url_for('subscribe') }}" method="post">
+          <input name="email" type="email" placeholder="you@example.com" aria-label="Email address" required>
+          <button type="submit">Subscribe</button>
+        </form>
+        <div class="subscribe-success-card" id="newsletterSuccess" style="display: none;">
+          <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+          <div class="subscribe-success-text">
+            <strong>You're subscribed!</strong>
+            <span>Check your inbox for a welcome briefing.</span>
+          </div>
+        </div>
+        {% endif %}
+      </div>
     </section>
   </main>
 

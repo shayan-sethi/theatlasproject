@@ -228,3 +228,44 @@ window.addEventListener('theme-changed', (e) => {
     document.documentElement.style.setProperty('--focus-accent', defaultColor);
   }
 });
+
+// Newsletter Form AJAX Handling
+const newsletterForm = document.getElementById('newsletterForm');
+const newsletterSuccess = document.getElementById('newsletterSuccess');
+
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = newsletterForm.querySelector('button');
+    const input = newsletterForm.querySelector('input');
+
+    if (!input.value) return;
+
+    btn.disabled = true;
+    const origText = btn.textContent;
+    btn.textContent = 'Subscribing...';
+
+    try {
+      const formData = new FormData(newsletterForm);
+      const res = await fetch(newsletterForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest',
+          'Accept': 'application/json'
+        }
+      });
+
+      if (res.ok) {
+        newsletterForm.style.display = 'none';
+        if (newsletterSuccess) {
+          newsletterSuccess.style.display = 'flex';
+        }
+      } else {
+        newsletterForm.submit(); // fallback to normal submit
+      }
+    } catch (err) {
+      newsletterForm.submit(); // fallback to normal submit
+    }
+  });
+}

@@ -123,7 +123,11 @@ def continent_csv():
 @app.route("/subscribe", methods=["POST"])
 def subscribe():
     email = request.form.get("email", "").strip()
+    is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest" or "application/json" in request.headers.get("Accept", "")
+
     if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+        if is_ajax:
+            return jsonify({"status": "error", "message": "Please enter a valid email address."}), 400
         return redirect(request.referrer or url_for("index"))
 
     subs_path = DATA_DIR / "subscribers.json"
@@ -137,6 +141,7 @@ def subscribe():
     emails = {s.get("email") if isinstance(s, dict) else s for s in subscribers}
     if email not in emails:
         entry = {"email": email, "subscribed_at": datetime.now(timezone.utc).isoformat()}
+        subscribers.insert(0, entry)
         try:
             DATA_DIR.mkdir(exist_ok=True)
             subs_path.write_text(json.dumps(subscribers, indent=2), encoding="utf-8")
@@ -151,7 +156,13 @@ def subscribe():
         # Send welcome email in the background
         send_welcome_email_async(email)
 
-    return redirect(request.referrer or url_for("index"))
+    if is_ajax:
+        return jsonify({
+            "status": "success",
+            "message": "You're subscribed! Check your inbox for a welcome briefing."
+        })
+
+    return redirect(url_for("index", subscribed="1") + "#newsletter")
 
 
 @app.route("/article/<article_slug>")
