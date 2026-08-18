@@ -66,7 +66,7 @@ PAGES = {
     },
     "about": {
         "title": "About Atlas",
-        "dek": "A small editorial project for curious readers who like their world news mapped.",
+        "dek": "An editorial project exploring politics, theory, and global affairs through a geographical lens.",
     },
 }
 
@@ -178,6 +178,11 @@ def article_detail(article_slug):
     )
 
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
+
 @app.route("/<continent_slug>")
 def continent(continent_slug):
     page = PAGES.get(continent_slug)
@@ -203,4 +208,4 @@ def continent(continent_slug):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

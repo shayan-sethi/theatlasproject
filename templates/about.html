@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About | The Atlas Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+SC:wght@600&family=Cinzel:wght@500;600&family=DM+Serif+Display&family=Inter:wght@400;500;600;700&family=Marcellus&family=Montserrat+Alternates:wght@600&family=Orbitron:wght@600&family=Playfair+Display:wght@700&family=Rajdhani:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="{{ url_for('static', filename='theme.js') }}"></script>
+</head>
+
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Atlas</a>
+    <nav class="site-nav" aria-label="Primary navigation">
+      <a href="/articles">Articles</a>
+      <a href="/atlas-arguments">Atlas Arguments</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="header-actions">
+      <button id="themeToggle" class="theme-toggle" aria-label="Toggle light/dark theme">
+        <svg class="sun-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+          fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2"
+          fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+      <details class="continent-menu">
+        <summary>Continents</summary>
+        <div class="continent-menu-panel">
+          <a href="/africa">Africa</a>
+          <a href="/asia">Asia</a>
+          <a href="/europe">Europe</a>
+          <a href="/north-america">North America</a>
+          <a href="/south-america">South America</a>
+          <a href="/oceania">Oceania</a>
+          <a href="/atlas-arguments">Atlas Arguments</a>
+        </div>
+      </details>
+      <a class="subscribe-link" href="/#newsletter">Subscribe</a>
+    </div>
+  </header>
+
+  <main class="about-page">
+    <section class="about-hero">
+      <span class="eyebrow">Atlas Editorial Desk</span>
+      <h1>About Atlas</h1>
+      <p class="about-lead">
+        Atlas is an editorial project that explores politics, political and philosophical theory through a geographical lens, alongside independent arguments. We examine how power, ideas, economics, society, and culture interact across regions. Our aim is to delve a little deeper than mere headlines and explore the systems that run our world, article by article.
+      </p>
+    </section>
+
+    <section class="about-details">
+      <div class="about-card founder-block">
+        <span class="about-card-eyebrow">Editorial &amp; Leadership</span>
+        <h2>Adi Narayanan Jha</h2>
+        <p class="about-card-title">Founder, Editor &amp; Writer</p>
+        <p>
+          Adi founded The Atlas Project as a student-led publication designed to explore the political, economic and social forces that shape our world. He writes and edits all pieces, which aim to make global affairs and complex political and philosophical theory accessible without stripping them of their complexity.
+        </p>
+      </div>
+
+      <div class="about-actions">
+        <a class="about-btn primary" href="/articles">Browse Articles</a>
+        <a class="about-btn" href="/atlas-arguments">Atlas Arguments</a>
+        <a class="about-btn secondary" href="/">Back to Map</a>
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
