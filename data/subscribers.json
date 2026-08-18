@@ -1,14 +1,6 @@
 [
   {
-    "email": "verceltest@example.com",
-    "subscribed_at": "2026-08-18T16:44:12.498371+00:00"
-  },
-  {
-    "email": "ajaxuser@example.com",
-    "subscribed_at": "2026-08-18T16:41:11.791189+00:00"
-  },
-  {
-    "email": "testuser@example.com",
-    "subscribed_at": "2026-08-18T16:41:11.790262+00:00"
+    "email": "speedtest@example.com",
+    "subscribed_at": "2026-08-18T17:04:56.330786+00:00"
   }
 ]

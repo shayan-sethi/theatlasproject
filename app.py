@@ -153,9 +153,9 @@ def subscribe():
             except Exception:
                 pass
 
-        # Send welcome email synchronously for serverless compatibility
+        # Send welcome email, admin alert, and save to Supabase/cloud DB in background
         try:
-            send_welcome_email(email)
+            send_welcome_email_async(email, entry)
         except Exception:
             pass
 
@@ -166,6 +166,14 @@ def subscribe():
         })
 
     return redirect(url_for("index", subscribed="1") + "#newsletter")
+
+
+@app.route("/api/subscribers")
+def get_subscribers():
+    """View current subscriber list (useful for monitoring on Vercel)."""
+    from email_service import _load_subscribers
+    emails = _load_subscribers()
+    return jsonify({"count": len(emails), "subscribers": emails})
 
 
 @app.route("/article/<article_slug>")
